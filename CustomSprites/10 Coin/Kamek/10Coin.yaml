@@ -1,0 +1,24 @@
+---
+#Replaces Actor 516 AC_OBJ_CLEAR_BLOCK (Sprite 218)
+
+# Created by timer.tpl
+source_files: [../src/10Coin.cpp]
+hooks:
+  - name: 10CoinBuild
+    type: add_func_pointer
+    src_addr_pal: 0x80972168
+    target_func: 'da10Coin::build(void)'
+
+  - name: 10CoinSpriteFileInfo
+    type: add_func_pointer
+    src_addr_pal: 0x8031aeb4
+    target_func: 'TenCoinNameList'
+    # 0x8031AB4C + sprite num * 0x4 == offset
+
+
+  - name: Update10CoinSpriteInfo
+    type: patch
+    # 0x8030A340 + sprite num * 0x28 == offset
+    addr_pal: 0x8030c550
+    #      -ID- ----  -X Offs- -Y Offs-  -RectX1- -RectY1- -RectX2- -RectY2-  -1C- -1E- -20- -22-  Flag ----
+    data: '0204 0000  00000000 00000000  00000000 00000000 00000000 00000000  0000 0000 0000 0000  0000 0000'
