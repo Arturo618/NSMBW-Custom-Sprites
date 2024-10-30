@@ -3,7 +3,6 @@
 #include <g3dhax.h>
 #include <sfx.h>
 
-extern "C" float pow(float num, float power);
 extern "C" void incCoin(int playerID); // 0x80060250
 extern "C" void addScore(int score, int playerID); // 0x80060690
 extern "C" bool SpawnEffect(const char*, int, Vec*, S16Vec*, Vec*);
@@ -127,7 +126,7 @@ void da10Coin::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
         }
         SpawnEffect("Wm_ob_starcoinget", 0, &this->pos, &(S16Vec){0,0,0}, &(Vec){1.0, 1.0, 1.0});
         PlaySound(this, SE_OBJ_GET_DRAGON_COIN); // Why would you name it that?
-        addScore(1000, 1);
+        addScore(100, 1);
         this->Delete(this->deleteForever);
     }
 }
